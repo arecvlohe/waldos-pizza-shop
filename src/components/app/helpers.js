@@ -29,25 +29,4 @@ function getPizzaSizes () {
   })
 }
 
-function getPizzaToppings (size) {
-  const SIZE = size.toUpperCase()
-  return new Task((rej, res) => {
-    client.query(`
-        {
-          pizzaSizeByName(name: ${SIZE}) {
-            toppings {
-              defaultSelected
-              topping {
-                name
-                price
-              }
-            }
-          }
-        }
-      `)
-      .then(res)
-      .catch(rej)
-  })
-}
-
-export { getPizzaSizes, getPizzaToppings }
+export { getPizzaSizes }

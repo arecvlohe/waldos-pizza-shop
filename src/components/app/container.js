@@ -107,7 +107,7 @@ const getDataAndMapProps = WrappedComponent => class extends Component {
     const cost = this.state.totalCost
     const order = { size, toppings, cost }
     this.props.addItemToCart(order)
-    this.setState({ currentPizzaSize: 'small' })
+    this.setState({ currentPizzaSize: 'small', totalCost: 9.99 })
   }
 
   render () {
