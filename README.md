@@ -7,7 +7,7 @@ To get running locally clone this repo to your desktop with:
 
 Then run either `yarn install` or `npm install` to install dependencies.
 
-Afterwards you should be able to fun the application from the command line using `npm run dev`.
+Afterwards you should be able to run the application from the command line using `npm run dev`.
 
 If you have any trouble or questions, please let me know!
 
