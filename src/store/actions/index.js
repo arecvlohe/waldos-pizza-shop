@@ -7,6 +7,28 @@ const client = new Lokka({
   transport: new Transport('https://core-graphql.dev.waldo.photos/pizza')
 })
 
+// FORM ACTIONS
+
+export const toggleToppings = (payload) => {
+  return {
+    type: types.TOGGLE_TOPPINGS,
+    payload
+  }
+}
+
+export const updatePizzaSize = (payload) => {
+  return {
+    type: types.UPDATE_PIZZA_SIZE,
+    payload
+  }
+}
+
+export const resetForm = () => {
+  return {
+    type: types.RESET_FORM
+  }
+}
+
 export const removeItemFromCart = (payload) => {
   return {
     type: types.REMOVE_ITEM_FROM_CART,
@@ -35,7 +57,7 @@ export const getDataFail = payload => {
   }
 }
 
-
+// FETCH DATA
 
 export const fetchData = () => dispatch => {
   dispatch({ type: types.FETCH_DATA_REQUEST })

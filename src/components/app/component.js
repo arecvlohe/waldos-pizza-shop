@@ -1,15 +1,17 @@
 import React from 'react'
 
+import pathOr from 'ramda/src/pathOr'
+
 export default function App (props) {
   return (
     <div>
       <select value={props.currentPizzaSize} onChange={props.handleUpdatePizzaSize}>
-        {props.pizzaSizes.map((p, i) => {
-          return <option value={p.name} key={`pizzaSizeIndex-${i}`}>{p.name[0].toUpperCase() + p.name.slice(1)}</option>
+        {pathOr([], ['form', 'WIP', 'pizzaSizes'], props).map((p, i) => {
+          return <option value={p} key={`pizzaSizeIndex-${i}`}>{p[0].toUpperCase() + p.slice(1)}</option>
         })}
       </select>
       <div>
-        {Object.keys(props.toppingsForSize).map((t, i) => {
+        {Object.keys(props.currentToppings).map((t, i) => {
           return (
             <div key={t + i}>
               <label>
@@ -17,8 +19,8 @@ export default function App (props) {
                 <input
                   name={t}
                   type='checkbox'
-                  disabled={props.isMaxedForSize[props.currentPizzaSize] && !props.toppingsForSize[t].isChecked}
-                  checked={props.toppingsForSize[t].isChecked}
+                  disabled={props.hasReachedMaxToppings && !props.currentToppings[t].isChecked}
+                  checked={props.currentToppings[t].isChecked}
                   onChange={props.handleUpdateTopping} />
               </label>
             </div>
@@ -26,17 +28,16 @@ export default function App (props) {
         })}
       </div>
       <div>
-        Total Cost:
-        ${props.totalCost.toFixed(2)}
+        Total Cost: ${props.currentPizzaTotal.toFixed(2)}
       </div>
       <div>
         <button onClick={props.handleAddPizza}>Add To Cart</button>
       </div>
       <div>
-        Subtotal Cart Cost: ${props.cart.totalCost.toFixed(2)}
+        Subtotal Cart Cost: ${props.currentCartTotal.toFixed(2)}
       </div>
       <div>
-        {props.cart.items.map((p, i) => {
+        {props.cart.map((p, i) => {
           return (
             <div key={'pizzaOrder' + i}>
               <div>
